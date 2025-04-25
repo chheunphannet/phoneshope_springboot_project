@@ -13,7 +13,7 @@ public class BrandServiceImpl implements BrandService {
 	private BrandRepository brandRepository;
 
 	@Override
-	public Brand create(Brand brand) {
+	public Brand save(Brand brand) {
  		return brandRepository.save(brand);
 	}
 

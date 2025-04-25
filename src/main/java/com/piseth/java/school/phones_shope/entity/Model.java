@@ -1,7 +1,5 @@
 package com.piseth.java.school.phones_shope.entity;
 
-import org.hibernate.annotations.ManyToAny;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +13,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "Model")
-public class Model {
+public class Model { 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "model_Id")
