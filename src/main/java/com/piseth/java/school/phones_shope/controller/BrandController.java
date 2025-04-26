@@ -1,7 +1,6 @@
 package com.piseth.java.school.phones_shope.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.piseth.java.school.phones_shope.DTO.BrandDTO;
 import com.piseth.java.school.phones_shope.ExceptionHandle.ApiException;
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
+import com.piseth.java.school.phones_shope.Mapper.BrandMapper;
 import com.piseth.java.school.phones_shope.entity.Brand;
 import com.piseth.java.school.phones_shope.service.BrandService;
-import com.piseth.java.school.phones_shope.util.Mapper;
 
 @RestController
 @RequestMapping("/brands")
@@ -26,15 +25,14 @@ public class BrandController {
 	private BrandService brandService;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody BrandDTO brandDTO) {
-		Brand brand = Mapper.toEntity(brandDTO);
-		return ResponseEntity.ok(brandService.save(brand)); 
+	public ResponseEntity<?> create(@RequestBody Brand brand) {
+		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brandService.save(brand))); 
 	} 
 	
 	@GetMapping("{id}")
 	public ResponseEntity<?> getBrand(@PathVariable Integer id) {
 		Brand brand = brandService.getByID(id);
-		return ResponseEntity.ok(brand); 
+		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand)); 
 	}
 	
 	@PutMapping("{id}")
@@ -47,6 +45,6 @@ public class BrandController {
 	public ResponseEntity<?> updatebyId(@PathVariable Integer id){
 		ResourceNotFoundException deleteByID = brandService.deleteByID(id);
 		ApiException e = new ApiException(deleteByID.getMessage(), deleteByID.getStatus());
-		return new ResponseEntity<>(e,deleteByID.getStatus());
+		return new ResponseEntity<>(e,deleteByID.getStatus()); 
 	}
 }

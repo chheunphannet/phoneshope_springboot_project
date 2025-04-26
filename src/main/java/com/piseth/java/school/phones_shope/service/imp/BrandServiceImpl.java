@@ -31,7 +31,7 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public Brand updateByID(Integer id, Brand brandUpdate) {
 		 Brand brand = getByID(id);
-		 brand.setName(brandUpdate.getName());
+		 brand.setName(brandUpdate.getName()); 
 		return brand;
 	}
 
