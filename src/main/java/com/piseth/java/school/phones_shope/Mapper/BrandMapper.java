@@ -1,5 +1,7 @@
 package com.piseth.java.school.phones_shope.Mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -12,4 +14,5 @@ public interface BrandMapper {
 	
 	Brand toBrand(BrandDTO brandDTO);
 	BrandDTO toBrandDTO(Brand brand);
+	List<BrandDTO> toListOfBrandDto(List<Brand> listOfBrand);
 }

@@ -1,6 +1,7 @@
 package com.piseth.java.school.phones_shope.service.imp;
 
-import java.net.ResponseCache;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,5 +44,22 @@ public class BrandServiceImpl implements BrandService {
 		}
 		return new ResourceNotFoundException("not found brand , id : " + id,HttpStatus.NOT_FOUND);
 	}
+
+	@Override
+	public List<Brand> getListOfBands() {
+		return brandRepository.findAll();
+	}
+
+	@Override
+	public List<Brand> getByName(String name) {
+		List<Brand> lsBrandDto = brandRepository.findByNameContainingIgnoreCase(name)
+				.stream()
+				.collect(Collectors.toList());
+		return lsBrandDto;
+	}
+
+
+	
+
 
 }
