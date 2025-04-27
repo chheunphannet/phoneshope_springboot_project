@@ -52,10 +52,7 @@ public class BrandServiceImpl implements BrandService {
 
 	@Override
 	public List<Brand> getByName(String name) {
-		List<Brand> lsBrandDto = brandRepository.findByNameContainingIgnoreCase(name)
-				.stream()
-				.collect(Collectors.toList());
-		return lsBrandDto;
+		return brandRepository.findByNameContainingIgnoreCase(name);
 	}
 
 
