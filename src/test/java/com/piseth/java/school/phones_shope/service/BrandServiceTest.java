@@ -1,4 +1,4 @@
-package com.piseth.java.school.phones_shope.utils.service;
+package com.piseth.java.school.phones_shope.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
