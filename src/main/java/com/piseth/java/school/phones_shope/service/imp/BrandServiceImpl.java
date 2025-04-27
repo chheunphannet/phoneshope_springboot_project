@@ -12,7 +12,10 @@ import com.piseth.java.school.phones_shope.entity.Brand;
 import com.piseth.java.school.phones_shope.repository.BrandRepository;
 import com.piseth.java.school.phones_shope.service.BrandService;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class BrandServiceImpl implements BrandService {
 	@Autowired
 	private BrandRepository brandRepository;
@@ -27,7 +30,7 @@ public class BrandServiceImpl implements BrandService {
 		return brandRepository.findById(id)
 				.orElseThrow(() ->
 				new ResourceNotFoundException("not found this brand, id : " + id,HttpStatus.NOT_FOUND));
-	}
+	} 
 
 	@Override
 	public Brand updateByID(Integer id, Brand brandUpdate) {

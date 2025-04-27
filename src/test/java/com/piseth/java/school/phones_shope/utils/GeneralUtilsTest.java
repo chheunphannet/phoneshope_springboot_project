@@ -1,10 +1,12 @@
-package com.piseth.java.school.phones_shope.service.utils;
+package com.piseth.java.school.phones_shope.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import com.piseth.java.school.phones_shope.service.utils.GeneralUtils;
 
 public class GeneralUtilsTest {
 	@Test
