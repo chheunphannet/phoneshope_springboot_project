@@ -1,11 +1,11 @@
 package com.piseth.java.school.phones_shope.controller;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +25,7 @@ import com.piseth.java.school.phones_shope.service.BrandService;
 import jakarta.websocket.server.PathParam;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/brands")
 public class BrandController {
 	@Autowired
@@ -69,6 +70,6 @@ public class BrandController {
 	public ResponseEntity<?> updatebyId(@PathVariable Integer id){
 		ResourceNotFoundException deleteByID = brandService.deleteByID(id);
 		ApiException e = new ApiException(deleteByID.getMessage(), deleteByID.getStatus());
-		return new ResponseEntity<>(e,deleteByID.getStatus()); 
+		return new ResponseEntity<>(e,deleteByID.getStatus());  
 	}
 }
