@@ -1,6 +1,5 @@
 package com.piseth.java.school.phones_shope.service;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
@@ -14,12 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.entity.Brand;
 import com.piseth.java.school.phones_shope.repository.BrandRepository;
-import com.piseth.java.school.phones_shope.service.BrandService;
 import com.piseth.java.school.phones_shope.service.imp.BrandServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,7 +47,7 @@ public class BrandServiceTest {
 		// given
 		Brand brand = new Brand();
 		brand.setName("asus");
-		brand.setId(1);
+		brand.setBrand_id(1);
 		// when
 		brandService.save(brand);
 		verify(brandRepository, times(1)).save(brand);
@@ -61,12 +58,12 @@ public class BrandServiceTest {
 		// given
 		Brand brand = new Brand();
 		brand.setName("tuf");
-		brand.setId(1);
+		brand.setBrand_id(1);
 		// when
 		when(brandRepository.findById(1)).thenReturn(Optional.of(brand));
 		Brand brandReturn = brandService.getByID(1);
 		// then
-		assertEquals(1, brandReturn.getId());
+		assertEquals(1, brandReturn.getBrand_id());
 		assertEquals("tuf", brandReturn.getName());
 
 	}

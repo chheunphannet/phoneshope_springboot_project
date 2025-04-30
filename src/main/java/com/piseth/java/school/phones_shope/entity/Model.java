@@ -12,14 +12,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Model")
-public class Model { 
+@Table(name = "models")
+public class Model {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "model_Id")
-	private Integer id;
-	@Column(name = "brand_name")
+	@Column(name = "model_id")
+	private Integer model_id;
+	
+	@Column(name = "model_name")
 	private String name;
+	
 	@ManyToOne
 	@JoinColumn(name = "brand_id")
 	private Brand brand;
