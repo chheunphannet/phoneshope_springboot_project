@@ -22,6 +22,6 @@ public class ModelController {
 	@PostMapping
 	public ResponseEntity<?> createModel(@RequestBody ModelDTO modelDTO) {
 		Model model = modelMapper.toModel(modelDTO);
-		return ResponseEntity.ok(modelService.save(model));
+		return ResponseEntity.ok(modelService.save(model)); 
 	}
 }

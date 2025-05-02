@@ -47,7 +47,7 @@ public class BrandServiceTest {
 		// given
 		Brand brand = new Brand();
 		brand.setName("asus");
-		brand.setBrand_id(1);
+		brand.setBrandId(1);
 		// when
 		brandService.save(brand);
 		verify(brandRepository, times(1)).save(brand);
@@ -58,12 +58,12 @@ public class BrandServiceTest {
 		// given
 		Brand brand = new Brand();
 		brand.setName("tuf");
-		brand.setBrand_id(1);
+		brand.setBrandId(1);
 		// when
 		when(brandRepository.findById(1)).thenReturn(Optional.of(brand));
 		Brand brandReturn = brandService.getByID(1);
 		// then
-		assertEquals(1, brandReturn.getBrand_id());
+		assertEquals(1, brandReturn.getBrandId());
 		assertEquals("tuf", brandReturn.getName());
 
 	}

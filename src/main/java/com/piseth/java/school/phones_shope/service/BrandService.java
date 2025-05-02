@@ -13,5 +13,5 @@ public interface BrandService {
 	ResourceNotFoundException deleteByID(Integer id); 
 	List<Brand> getListOfBands();
 	List<Brand> getByName(String name);
-	List<Model> findModelByBrandbrand_id(Integer id);
+	
 }

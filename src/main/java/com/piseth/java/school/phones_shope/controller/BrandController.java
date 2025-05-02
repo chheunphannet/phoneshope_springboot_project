@@ -24,15 +24,18 @@ import com.piseth.java.school.phones_shope.Mapper.ModelMapper;
 import com.piseth.java.school.phones_shope.entity.Brand;
 import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.service.BrandService;
+import com.piseth.java.school.phones_shope.service.ModelService;
 
 import jakarta.websocket.server.PathParam;
-
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/brands")
 public class BrandController {
-	@Autowired
-	private BrandService brandService;
+	
+	private final BrandService brandService;
+	private final ModelService modelService;
 	
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Brand brand) {
@@ -78,7 +81,7 @@ public class BrandController {
 	
 	@GetMapping("{id}/brand")
 	public ResponseEntity<?> findModelByBrandId(@PathVariable Integer id){
-		List<ModelDTO> listDto = ModelMapper.INSTANCE.toListDto(brandService.findModelByBrandbrand_id(id));
+		List<ModelDTO> listDto = ModelMapper.INSTANCE.toListDto(modelService.findByBrandId(id));
 		return ResponseEntity.ok(listDto);
 	}
 	
