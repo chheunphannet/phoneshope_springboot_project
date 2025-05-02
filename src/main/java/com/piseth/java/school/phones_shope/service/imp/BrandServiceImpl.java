@@ -9,16 +9,25 @@ import org.springframework.stereotype.Service;
 
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.entity.Brand;
+import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.repository.BrandRepository;
+import com.piseth.java.school.phones_shope.repository.ModelRepository;
 import com.piseth.java.school.phones_shope.service.BrandService;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Service
-@AllArgsConstructor
 public class BrandServiceImpl implements BrandService {
+	
 	@Autowired
 	private BrandRepository brandRepository;
+	@Autowired
+	private ModelRepository modelRepository;
+	
+	public BrandServiceImpl(BrandRepository brandRepository) {
+		this.brandRepository = brandRepository;
+	}
 
 	@Override
 	public Brand save(Brand brand) {
@@ -58,8 +67,10 @@ public class BrandServiceImpl implements BrandService {
 		return brandRepository.findByNameContainingIgnoreCase(name);
 	}
 
+	@Override
+	public List<Model> findModelByBrandbrand_id(Integer id) {
+		return modelRepository.findModelByBrandbrand_id(id);
+	}
 
 	
-
-
 }

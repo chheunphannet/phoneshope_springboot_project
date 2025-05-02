@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.piseth.java.school.phones_shope.DTO.BrandDTO;
+import com.piseth.java.school.phones_shope.DTO.ModelDTO;
 import com.piseth.java.school.phones_shope.ExceptionHandle.ApiException;
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.Mapper.BrandMapper;
+import com.piseth.java.school.phones_shope.Mapper.ModelMapper;
 import com.piseth.java.school.phones_shope.entity.Brand;
+import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.service.BrandService;
 
 import jakarta.websocket.server.PathParam;
@@ -72,4 +75,11 @@ public class BrandController {
 		ApiException e = new ApiException(deleteByID.getMessage(), deleteByID.getStatus());
 		return new ResponseEntity<>(e,deleteByID.getStatus());  
 	}
+	
+	@GetMapping("{id}/brand")
+	public ResponseEntity<?> findModelByBrandId(@PathVariable Integer id){
+		List<ModelDTO> listDto = ModelMapper.INSTANCE.toListDto(brandService.findModelByBrandbrand_id(id));
+		return ResponseEntity.ok(listDto);
+	}
+	
 }

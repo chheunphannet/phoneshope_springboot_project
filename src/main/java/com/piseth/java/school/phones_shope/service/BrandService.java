@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.entity.Brand;
+import com.piseth.java.school.phones_shope.entity.Model;
 
 public interface BrandService {
 	Brand save(Brand brand);  
@@ -12,4 +13,5 @@ public interface BrandService {
 	ResourceNotFoundException deleteByID(Integer id); 
 	List<Brand> getListOfBands();
 	List<Brand> getByName(String name);
+	List<Model> findModelByBrandbrand_id(Integer id);
 }

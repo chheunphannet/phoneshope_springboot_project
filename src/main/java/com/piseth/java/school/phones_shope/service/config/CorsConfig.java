@@ -1,4 +1,4 @@
-package com.piseth.java.school.phones_shope.service.utils;
+package com.piseth.java.school.phones_shope.service.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,6 +1,5 @@
 package com.piseth.java.school.phones_shope.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +11,13 @@ import com.piseth.java.school.phones_shope.Mapper.ModelMapper;
 import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.service.ModelService;
 
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 @RestController
 @RequestMapping("/model")
 public class ModelController {
-	@Autowired
-	private ModelService modelService;
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelService modelService;
+	private final ModelMapper modelMapper;
 
 	@PostMapping
 	public ResponseEntity<?> createModel(@RequestBody ModelDTO modelDTO) {
