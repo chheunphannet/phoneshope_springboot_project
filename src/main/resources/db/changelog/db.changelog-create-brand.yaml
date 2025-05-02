@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: "Phanet"
+      changes:
+        - createTable:
+            tableName: brands
+            columns:
+              - column:
+                  name: brand_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: brand_name
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: false

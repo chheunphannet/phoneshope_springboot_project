@@ -54,12 +54,12 @@ public class BrandController {
 	}
 	
 	//@GetMapping @covert to list of brandDto use stream
-	public ResponseEntity<?> getListOfBrandsUseStream(){
-		List<BrandDTO> lsBrandDto = brandService.getListOfBands().stream()
-			.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
-			.collect(Collectors.toList());
-		return ResponseEntity.ok(lsBrandDto);
-	}
+//	public ResponseEntity<?> getListOfBrandsUseStream(){
+//		List<BrandDTO> lsBrandDto = brandService.getListOfBands().stream()
+//			.map(brand -> BrandMapper.INSTANCE.toBrandDTO(brand))
+//			.collect(Collectors.toList());
+//		return ResponseEntity.ok(lsBrandDto);
+//	}
 	
 	@GetMapping("/filter")
 		public ResponseEntity<?> getListByName(@PathParam("name") String name){

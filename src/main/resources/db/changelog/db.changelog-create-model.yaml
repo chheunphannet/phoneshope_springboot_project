@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2"
+      author: "phanet"
+      changes:
+        - createTable:
+            tableName: models
+            columns:
+              - column:
+                  name: model_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: model_name
+                  type: VARCHAR(255)
+              - column:
+                  name: brand_id
+                  type: INT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: models
+            baseColumnNames: brand_id
+            referencedTableName: brands
+            referencedColumnNames: brand_id
+            constraintName: fk_models_brand

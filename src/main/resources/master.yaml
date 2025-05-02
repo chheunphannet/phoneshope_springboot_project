@@ -1,0 +1,73 @@
+databaseChangeLog:
+- changeSet:
+    id: 1746199565416-1
+    author: TUF (generated)
+    changes:
+    - createSequence:
+        cacheSize: 1
+        cycle: false
+        dataType: bigint
+        incrementBy: 50
+        maxValue: 9223372036854775807
+        minValue: 1
+        sequenceName: brand_seq
+        startValue: 1
+- changeSet:
+    id: 1746199565416-2
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: brands_pkey
+            name: brand_id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: brand_name
+            type: VARCHAR(15)
+        tableName: brands
+- changeSet:
+    id: 1746199565416-3
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: models_pkey
+            name: model_id
+            type: INTEGER
+        - column:
+            name: model_name
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: brand_id
+            type: INTEGER
+        tableName: models
+- changeSet:
+    id: 1746199565416-4
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: brand_id
+        baseTableName: models
+        constraintName: fk_models_brand
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: brand_id
+        referencedTableName: brands
+        validate: true
+

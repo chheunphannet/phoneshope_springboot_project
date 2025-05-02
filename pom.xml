@@ -84,6 +84,11 @@
 			<version>2.8.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+		</dependency>
+
 		<!-- Lombok MapStruct Binding (optional, only needed if you have issues
 		with Lombok and MapStruct together) -->
 		<dependency>
@@ -121,6 +126,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<configuration>
+					<propertyFile>
+						src/main/resources/liquibase.properties
+					</propertyFile>
+				</configuration>
+			</plugin>
+
 		</plugins>
 	</build>
 
