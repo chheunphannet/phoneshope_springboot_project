@@ -1,6 +1,6 @@
 databaseChangeLog:
 - changeSet:
-    id: 1746199565416-1
+    id: 1746612774592-1
     author: TUF (generated)
     changes:
     - createSequence:
@@ -13,7 +13,7 @@ databaseChangeLog:
         sequenceName: brand_seq
         startValue: 1
 - changeSet:
-    id: 1746199565416-2
+    id: 1746612774592-2
     author: TUF (generated)
     changes:
     - createTable:
@@ -33,7 +33,27 @@ databaseChangeLog:
             type: VARCHAR(15)
         tableName: brands
 - changeSet:
-    id: 1746199565416-3
+    id: 1746612774592-3
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: color_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: color_name
+            type: VARCHAR(10)
+        tableName: color
+- changeSet:
+    id: 1746612774592-4
     author: TUF (generated)
     changes:
     - createTable:
@@ -56,7 +76,148 @@ databaseChangeLog:
             type: INTEGER
         tableName: models
 - changeSet:
-    id: 1746199565416-4
+    id: 1746612774592-5
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: product_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: available_unit
+            type: INTEGER
+        - column:
+            name: image_path
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: product_name
+            type: VARCHAR(15)
+        - column:
+            constraints:
+              nullable: false
+            name: sale_price
+            type: numeric(38, 2)
+        - column:
+            name: brand_id
+            type: INTEGER
+        - column:
+            name: color_id
+            type: INTEGER
+        - column:
+            name: model_id
+            type: INTEGER
+        tableName: product
+- changeSet:
+    id: 1746612774592-6
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: product_imort_history_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: import_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: import_unit
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: price_per_unit
+            type: numeric(38, 2)
+        - column:
+            name: product_id
+            type: INTEGER
+        tableName: product_imort_history
+- changeSet:
+    id: 1746612774592-7
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: sale_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: sale_date
+            type: TIMESTAMP WITHOUT TIME ZONE
+        tableName: sale
+- changeSet:
+    id: 1746612774592-8
+    author: TUF (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: sale_detail_pkey
+            name: id
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: amount
+            type: numeric(38, 2)
+        - column:
+            constraints:
+              nullable: false
+            name: unit
+            type: INTEGER
+        - column:
+            name: pruduct_id
+            type: INTEGER
+        - column:
+            name: sale_id
+            type: INTEGER
+        tableName: sale_detail
+- changeSet:
+    id: 1746612774592-9
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: color_id
+        baseTableName: product
+        constraintName: fk7j8aci4xn0sahyhxk0fvqql6e
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: color
+        validate: true
+- changeSet:
+    id: 1746612774592-10
     author: TUF (generated)
     changes:
     - addForeignKeyConstraint:
@@ -69,5 +230,80 @@ databaseChangeLog:
         onUpdate: NO ACTION
         referencedColumnNames: brand_id
         referencedTableName: brands
+        validate: true
+- changeSet:
+    id: 1746612774592-11
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: model_id
+        baseTableName: product
+        constraintName: fka55fqnfwm9rlwuqvvqxdll2wk
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: model_id
+        referencedTableName: models
+        validate: true
+- changeSet:
+    id: 1746612774592-12
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: pruduct_id
+        baseTableName: sale_detail
+        constraintName: fkee02fm2ro4dn55f9lii8wavno
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: product
+        validate: true
+- changeSet:
+    id: 1746612774592-13
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: sale_id
+        baseTableName: sale_detail
+        constraintName: fkgnpg9v1mvi1nyhc18vdcyuh98
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: sale
+        validate: true
+- changeSet:
+    id: 1746612774592-14
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: brand_id
+        baseTableName: product
+        constraintName: fkh259gmj2fw5b2pqed7ii3rpnl
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: brand_id
+        referencedTableName: brands
+        validate: true
+- changeSet:
+    id: 1746612774592-15
+    author: TUF (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: product_id
+        baseTableName: product_imort_history
+        constraintName: fksagiw6e4b2xk319psqwullfys
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: id
+        referencedTableName: product
         validate: true
 

@@ -1,22 +1,16 @@
 package com.piseth.java.school.phones_shope.service.imp;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.entity.Brand;
-import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.repository.BrandRepository;
-import com.piseth.java.school.phones_shope.repository.ModelRepository;
 import com.piseth.java.school.phones_shope.service.BrandService;
-import com.piseth.java.school.phones_shope.service.ModelService;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Service
