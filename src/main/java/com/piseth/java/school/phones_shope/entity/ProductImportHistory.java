@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import lombok.Data;
 @Entity
 @Data
-public class ProductImortHistory {
+public class ProductImportHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

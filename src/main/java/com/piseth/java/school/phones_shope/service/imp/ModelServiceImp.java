@@ -30,6 +30,6 @@ public class ModelServiceImp implements ModelService {
 	public Model getByID(Integer id) {
 		return modelRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("not found this brand, id : " + id, HttpStatus.NOT_FOUND));
-	}
+	} 
 
 } 
