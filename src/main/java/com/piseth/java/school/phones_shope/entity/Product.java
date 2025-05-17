@@ -11,13 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Product", 
-uniqueConstraints = {@UniqueConstraint(columnNames = {"color_id","model_id","brand_id"})}
-)
+@Table(name = "Product", uniqueConstraints = { @UniqueConstraint(columnNames = { "color_id", "model_id" }) })
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,9 @@ public class Product {
 	@Column(name = "product_name", nullable = false, length = 50, unique = true)
 	private String name;
 	@Column(name = "available_unit")
-	private Integer availableUnit;
+	private Integer availableUnit = 0;
 	@Column(name = "sale_price")
+	@DecimalMin(value = "0.01")
 	private BigDecimal salePrice;
 	@Column(name = "image_path")
 	private String imagePath;
@@ -36,7 +36,5 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "model_id")
 	private Model model;
-	
-	
-	
+
 }

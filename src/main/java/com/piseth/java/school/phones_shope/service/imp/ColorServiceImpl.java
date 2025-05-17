@@ -18,7 +18,7 @@ public class ColorServiceImpl implements ColorService{
 	@Override
 	public Color getColorByID(Integer id) {
 		return colorRepository.findById(id).orElseThrow(
-				() ->  new ResourceNotFoundException("not found this brand, id : " + id, HttpStatus.NOT_FOUND));
+				() ->  new ResourceNotFoundException("not found this color, id : " + id, HttpStatus.NOT_FOUND));
 	}
 
 	@Override

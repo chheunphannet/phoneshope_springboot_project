@@ -1,5 +1,7 @@
 package com.piseth.java.school.phones_shope.service.imp;
 
+import java.math.BigDecimal;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -36,14 +38,21 @@ public class ProductServieImpl implements ProductServie {
 
 	@Override
 	public void importProduct(ProductImportDTO dto) {
-		//import product
+		// import product
 		Product product = this.getbyId(dto.getProductId());
 		product.setAvailableUnit(product.getAvailableUnit() + dto.getImportUnit());
 		productRepository.save(product);
-		//save to product history
+		// save to product history
 		ProductImportHistory productHistory = ProductMapper.toProductIpmortHistory(dto);
 		productHistory.setProduct(product);
 		productHistoryRepo.save(productHistory);
+	}
+
+	@Override
+	public void setSalePrice(Integer id, BigDecimal price) {
+		Product product = getbyId(id);
+		product.setSalePrice(price);
+		productRepository.save(product);
 	}
 
 }
