@@ -70,18 +70,5 @@ public class saleServiceImpl implements saleService {
 		saveSaleDetail(dto,sale,validate);
 		
 	}
-	
-
-
-//	@Override
-//	public void validate(saleDTO dto) { // dto product id, qt of product
-//		dto.getProducts().forEach(ps -> { // each is productSold
-//			Product product = productServie.getbyId(ps.getProductId());
-//			if (product.getAvailableUnit() > ps.getNumOfUnit()) {
-//				throw new ResourceNotFoundException(
-//						"product %s is less than product to buy".formatted(product.getName()), HttpStatus.BAD_REQUEST);
-//			}
-//		});
-//	}
 
 }

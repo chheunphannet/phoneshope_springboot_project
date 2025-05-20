@@ -11,6 +11,6 @@ import com.piseth.java.school.phones_shope.entity.Color;
 public interface ColorMapper {
 	ColorMapper INSTANCE = Mappers.getMapper(ColorMapper.class);
 
-	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "colorId", ignore = true)
 	Color toColor(ColorDTO dto);
 }
