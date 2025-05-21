@@ -3,8 +3,10 @@ package com.piseth.java.school.phones_shope.service.imp;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -70,8 +72,8 @@ public class ProductServieImpl implements ProductServie {
 	}
 
 	@Override
-	public List<ProductImportDTO> uploadProduct(MultipartFile file) {
-		List<ProductImportDTO> loadProduct = new ArrayList<>();
+	public Map<ProductImportDTO, String> uploadProduct(MultipartFile file) {
+		Map<ProductImportDTO, String> loadProduct = new HashMap<>();
 		if (isExelFile(file)) {
 			try {
 				XSSFWorkbook workBook = new XSSFWorkbook(file.getInputStream());
@@ -86,37 +88,38 @@ public class ProductServieImpl implements ProductServie {
 					int cellIndex = 0;
 					ProductImportDTO product = new ProductImportDTO();
 					Integer modelId = 0, colorId = 0;
-					while (cellIterator.hasNext()) {
-						Cell cell = cellIterator.next();
-						switch (cellIndex) {
-						case 0:
-							modelId = (int) cell.getNumericCellValue();
-							break;
-						case 1:
-							colorId = (int) cell.getNumericCellValue();
-							break;
-						case 2:
-							product.setImportUnit((int) cell.getNumericCellValue());
-							break;
-						case 3:
-							double price = cell.getNumericCellValue();
-							product.setPricePerUnit(BigDecimal.valueOf(price));
-							break;
-						case 4:
-							product.setImportDate(cell.getLocalDateTimeCellValue());
-							break;
-						}
-						cellIndex++;
-					}
 					try {
+						while (cellIterator.hasNext()) {
+							Cell cell = cellIterator.next();
+							switch (cellIndex) {
+							case 0:
+								modelId = (int) cell.getNumericCellValue();
+								break;
+							case 1:
+								colorId = (int) cell.getNumericCellValue();
+								break;
+							case 2:
+								product.setImportUnit((int) cell.getNumericCellValue());
+								break;
+							case 3:
+								double price = cell.getNumericCellValue();
+								product.setPricePerUnit(BigDecimal.valueOf(price));
+								break;
+							case 4:
+								product.setImportDate(cell.getLocalDateTimeCellValue());
+								break;
+							}
+							cellIndex++;
+						}
+
 						if (modelId != 0 && colorId != 0) {
 							Product pd = findByModel_ModelIdAndColor_ColorId(modelId, colorId);
 							product.setProductId(pd.getId());
 							importProduct(product);
-							loadProduct.add(product);
+							loadProduct.put(product, "row: " + row.getRowNum() + " import!");
 						}
-					} catch (ResourceNotFoundException e) {
-						System.out.println("row : " + row.getRowNum() + e.getLocalizedMessage());
+					} catch (ResourceNotFoundException | IllegalStateException e) {
+						loadProduct.put(product, "row: " + row.getRowNum() + " " + e.getMessage());
 					}
 
 				}

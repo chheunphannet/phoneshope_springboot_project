@@ -54,8 +54,7 @@ public class ProductController {
 	
 	@PostMapping(value = "/uploadProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> uploadProductsExelFile(@RequestParam MultipartFile file){
-		List<ProductImportDTO> uploadProduct = productServie.uploadProduct(file);
-		return ResponseEntity.ok(uploadProduct);
+		return ResponseEntity.ok(productServie.uploadProduct(file));
 	}
 
 }
