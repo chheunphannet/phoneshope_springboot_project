@@ -11,4 +11,6 @@ public interface saleService {
 	Sale saveSale(saleDTO dto);
 	void saveSaleDetail(saleDTO dto, Sale sale, Map<Integer, Product> productMap); 
 	void sell(saleDTO dto);
+	Sale findById(Integer id);
+	void cancelSale(Integer saleId);
 }

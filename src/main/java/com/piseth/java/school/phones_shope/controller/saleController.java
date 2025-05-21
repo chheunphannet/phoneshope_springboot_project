@@ -1,7 +1,9 @@
 package com.piseth.java.school.phones_shope.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +21,12 @@ public class saleController {
 	@PostMapping
 	public ResponseEntity<?> sellProducts(@RequestBody saleDTO dto){
 		ServiceSale.sell(dto);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("sold!");
+	}
+	
+	@PutMapping("{saleId}/calcel")
+	public ResponseEntity<?> calcelSale(@PathVariable Integer saleId){
+		ServiceSale.cancelSale(saleId);
+		return ResponseEntity.ok("calceled!");
 	}
 }

@@ -10,4 +10,5 @@ public class saleDTO {
 	@NotEmpty
 	private List<productsoldDTO> products;
 	private LocalDateTime saleDate;
+	private boolean active;
 }

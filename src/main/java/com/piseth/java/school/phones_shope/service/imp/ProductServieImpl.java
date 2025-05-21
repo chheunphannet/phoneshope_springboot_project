@@ -102,8 +102,7 @@ public class ProductServieImpl implements ProductServie {
 								product.setImportUnit((int) cell.getNumericCellValue());
 								break;
 							case 3:
-								double price = cell.getNumericCellValue();
-								product.setPricePerUnit(BigDecimal.valueOf(price));
+								product.setPricePerUnit(BigDecimal.valueOf(cell.getNumericCellValue()));
 								break;
 							case 4:
 								product.setImportDate(cell.getLocalDateTimeCellValue());

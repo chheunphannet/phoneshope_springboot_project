@@ -15,6 +15,7 @@ import com.piseth.java.school.phones_shope.Mapper.saleDetailMapper;
 import com.piseth.java.school.phones_shope.entity.Product;
 import com.piseth.java.school.phones_shope.entity.Sale;
 import com.piseth.java.school.phones_shope.entity.SaleDetail;
+import com.piseth.java.school.phones_shope.repository.ProductRepository;
 import com.piseth.java.school.phones_shope.repository.saleDetalRepository;
 import com.piseth.java.school.phones_shope.repository.saleRepository;
 import com.piseth.java.school.phones_shope.service.ProductServie;
@@ -29,6 +30,7 @@ public class saleServiceImpl implements saleService {
 	private final ProductServie productServie;
 	private final saleDetalRepository saleDetalRepository;
 	private final saleDetailMapper detailMapper;
+	private final ProductRepository productRepository;
 	@Override
 	public Map<Integer, Product> validate(saleDTO dto) {
 		// productSold product id, qt of product
@@ -51,6 +53,7 @@ public class saleServiceImpl implements saleService {
 	public Sale saveSale(saleDTO dto) {
 		Sale sale = new Sale();
 		sale.setSoldDate(dto.getSaleDate());
+		sale.setActive(dto.isActive());
 		return saleRepository.save(sale);
 	}
 
@@ -71,4 +74,31 @@ public class saleServiceImpl implements saleService {
 		
 	}
 
+	@Override
+	public Sale findById(Integer id) {
+		return saleRepository.findById(id).orElseThrow(
+				() -> new ResourceNotFoundException("not found this sale, id : " + id, HttpStatus.NOT_FOUND));
+	}
+
+	@Override
+	public void cancelSale(Integer saleId) {
+		Sale sale = findById(saleId);
+		if(sale.isActive()) {
+			List<SaleDetail> saleDetailList = saleDetalRepository.findBySaleId(saleId);
+			Map<Integer, Product> products = saleDetailList.stream()
+					.map(pd -> pd.getProduct())
+					.collect(Collectors.toMap(Product::getId, Function.identity()));
+			
+			saleDetailList.forEach(t -> {
+				Product product = products.get(t.getProduct().getId());
+				product.setAvailableUnit(product.getAvailableUnit() + t.getUnit());
+				sale.setActive(false);
+				saleRepository.save(sale);
+				productRepository.save(product);
+			});
+		}
+		
+	}
+	
+	
 }
