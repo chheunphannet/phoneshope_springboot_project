@@ -1,9 +1,7 @@
 package com.piseth.java.school.phones_shope.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,7 +20,6 @@ import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundExcep
 import com.piseth.java.school.phones_shope.Mapper.BrandMapper;
 import com.piseth.java.school.phones_shope.Mapper.ModelMapper;
 import com.piseth.java.school.phones_shope.entity.Brand;
-import com.piseth.java.school.phones_shope.entity.Model;
 import com.piseth.java.school.phones_shope.service.BrandService;
 import com.piseth.java.school.phones_shope.service.ModelService;
 
@@ -38,8 +35,8 @@ public class BrandController {
 	private final ModelService modelService;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Brand brand) {
-		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brandService.save(brand))); 
+	public ResponseEntity<?> create(@RequestBody BrandDTO dto) {
+		return ResponseEntity.ok(brandService.save(BrandMapper.INSTANCE.toBrand(dto))); 
 	} 
 	
 	@GetMapping("{id}")
@@ -67,8 +64,8 @@ public class BrandController {
 		}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> updatebyId(@PathVariable Integer id, @RequestBody Brand brandUpdate) {
-		Brand brand = brandService.updateByID(id, brandUpdate);
+	public ResponseEntity<?> updatebyId(@PathVariable Integer id, @RequestBody BrandDTO dto) {
+		Brand brand = brandService.updateByID(id, BrandMapper.INSTANCE.toBrand(dto));
 		return ResponseEntity.ok(brandService.save(brand));
 	}
 	

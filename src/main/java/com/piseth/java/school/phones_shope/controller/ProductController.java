@@ -1,7 +1,5 @@
 package com.piseth.java.school.phones_shope.controller;
 
-import java.util.List;
-
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

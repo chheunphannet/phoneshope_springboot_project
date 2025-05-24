@@ -18,6 +18,7 @@ public class ProductImportHistory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name = "import_unit",nullable = false)
+	
 	private Integer importUnit;
 	@Column(name = "price_per_unit",nullable = false)
 	private BigDecimal pricePerUnit;
@@ -25,6 +26,7 @@ public class ProductImportHistory {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	
 	@Column(name = "import_Date",nullable = false)
 	private LocalDateTime importDate;
 }

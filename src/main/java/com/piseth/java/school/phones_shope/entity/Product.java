@@ -21,18 +21,24 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name = "product_name", nullable = false, length = 50, unique = true)
 	private String name;
+	
 	@Column(name = "available_unit")
 	private Integer availableUnit = 0;
+	
 	@Column(name = "sale_price")
 	@DecimalMin(value = "0.01")
 	private BigDecimal salePrice;
+	
 	@Column(name = "image_path")
 	private String imagePath;
+	
 	@ManyToOne
 	@JoinColumn(name = "color_id")
 	private Color color;
+	
 	@ManyToOne
 	@JoinColumn(name = "model_id")
 	private Model model;

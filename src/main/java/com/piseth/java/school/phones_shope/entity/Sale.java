@@ -17,5 +17,5 @@ public class Sale {
 	private Integer id;
 	@Column(name = "sale_date",nullable = false)
 	private LocalDateTime soldDate;
-	private boolean active;
+	private Boolean active;
 }

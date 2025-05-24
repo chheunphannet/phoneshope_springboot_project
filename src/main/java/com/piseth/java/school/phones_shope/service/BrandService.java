@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.piseth.java.school.phones_shope.ExceptionHandle.ResourceNotFoundException;
 import com.piseth.java.school.phones_shope.entity.Brand;
-import com.piseth.java.school.phones_shope.entity.Model;
 
 public interface BrandService {
 	Brand save(Brand brand);  

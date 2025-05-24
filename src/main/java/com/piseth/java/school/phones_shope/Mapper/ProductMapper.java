@@ -7,11 +7,9 @@ import com.piseth.java.school.phones_shope.DTO.ProductDTO;
 import com.piseth.java.school.phones_shope.DTO.ProductImportDTO;
 import com.piseth.java.school.phones_shope.entity.Product;
 import com.piseth.java.school.phones_shope.entity.ProductImportHistory;
-import com.piseth.java.school.phones_shope.repository.ProductImportHistoryRepository;
 import com.piseth.java.school.phones_shope.service.BrandService;
 import com.piseth.java.school.phones_shope.service.ColorService;
 import com.piseth.java.school.phones_shope.service.ModelService;
-import com.piseth.java.school.phones_shope.service.ProductServie;
 
 @Mapper(componentModel = "spring", 
 		uses = {

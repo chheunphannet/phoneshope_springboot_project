@@ -83,12 +83,13 @@ public class saleServiceImpl implements saleService {
 	@Override
 	public void cancelSale(Integer saleId) {
 		Sale sale = findById(saleId);
-		if(sale.isActive()) {
+		if(sale.getActive()) {
 			List<SaleDetail> saleDetailList = saleDetalRepository.findBySaleId(saleId);
 			Map<Integer, Product> products = saleDetailList.stream()
-					.map(pd -> pd.getProduct())
+					.map(pd -> pd.getProduct()) // why -> list of sale Detail have product
 					.collect(Collectors.toMap(Product::getId, Function.identity()));
-			
+			// why -> we get product and access to product id
+		    // put to map <Integer = pd.getId, pd.getProduct>
 			saleDetailList.forEach(t -> {
 				Product product = products.get(t.getProduct().getId());
 				product.setAvailableUnit(product.getAvailableUnit() + t.getUnit());
@@ -97,7 +98,6 @@ public class saleServiceImpl implements saleService {
 				productRepository.save(product);
 			});
 		}
-		
 	}
 	
 	
