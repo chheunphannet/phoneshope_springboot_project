@@ -14,7 +14,8 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-
+import lombok.AllArgsConstructor;
+@AllArgsConstructor
 public class saleDetailSpec implements Specification<SaleDetail> {
 	private saleDetalFilter detalFilter;
 

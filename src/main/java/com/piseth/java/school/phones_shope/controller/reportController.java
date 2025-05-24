@@ -22,4 +22,9 @@ public class reportController {
 	public ResponseEntity<?> findSoldProduct(@PathVariable LocalDate start,@PathVariable LocalDate end) {
 		return ResponseEntity.ok(reportService.getProductSold(start, end));
 	}
+	
+	@GetMapping("v2/{start}/{end}")
+	public ResponseEntity<?> findSoldProductv2(@PathVariable LocalDate start,@PathVariable LocalDate end) {
+		return ResponseEntity.ok(reportService.getProductSoldByDate(start, end));
+	}
 }
