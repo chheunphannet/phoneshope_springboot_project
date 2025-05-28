@@ -27,14 +27,14 @@ import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.56.1:4200"})
 @RequestMapping("/brands")
 public class BrandController {
 	
 	private final BrandService brandService;
 	private final ModelService modelService;
 	
-	@PostMapping
+	@PostMapping("/post")
 	public ResponseEntity<?> create(@RequestBody BrandDTO dto) {
 		return ResponseEntity.ok(brandService.save(BrandMapper.INSTANCE.toBrand(dto))); 
 	} 

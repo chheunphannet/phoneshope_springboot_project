@@ -11,7 +11,6 @@ import com.piseth.java.school.phones_shope.entity.Product;
 import com.piseth.java.school.phones_shope.entity.Sale;
 import com.piseth.java.school.phones_shope.entity.SaleDetail;
 import com.piseth.java.school.phones_shope.repository.ProductRepository;
-import com.piseth.java.school.phones_shope.service.ProductServie;
 
 import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor

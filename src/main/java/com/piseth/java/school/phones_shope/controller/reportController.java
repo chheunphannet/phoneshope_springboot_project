@@ -27,4 +27,10 @@ public class reportController {
 	public ResponseEntity<?> findSoldProductv2(@PathVariable LocalDate start,@PathVariable LocalDate end) {
 		return ResponseEntity.ok(reportService.getProductSoldByDate(start, end));
 	}
+	
+	@GetMapping("ExpenseRepoty/{start}/{end}")
+	public ResponseEntity<?> findProductImportByDate(@PathVariable LocalDate start,@PathVariable LocalDate end) {
+		return ResponseEntity.ok(reportService.getProductImportByDate(start, end));
+	}
+	
 }
