@@ -12,11 +12,7 @@ public class expendReportDtoMapperImpl implements ExpendReportDtoMapper{
 
 	@Override
 	public expendReportDTO  toListExpendReportDTO(Integer id, String name, Integer sumUnit, BigDecimal sumAmount) {
-		expendReportDTO ep = new expendReportDTO();
-		ep.setProductId(id);
-		ep.setProductName(name);
-		ep.setUnit(sumUnit);
-		ep.setTotalAmount(sumAmount);
+		expendReportDTO ep = new expendReportDTO(sumUnit, name, sumUnit, sumAmount);
 		return ep;
 	}
 	

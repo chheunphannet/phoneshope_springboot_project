@@ -3,6 +3,7 @@ package com.piseth.java.school.phones_shope.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class BrandController {
 	private final BrandService brandService;
 	private final ModelService modelService;
 	
+	@PreAuthorize("hasAuthority('Brand:Write')")
 	@PostMapping("/post")
 	public ResponseEntity<?> create(@RequestBody BrandDTO dto) {
 		return ResponseEntity.ok(brandService.save(BrandMapper.INSTANCE.toBrand(dto))); 
@@ -45,6 +47,7 @@ public class BrandController {
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand)); 
 	}
 	
+	@PreAuthorize("hasAuthority('Brand:Read')")
 	@GetMapping
 	public ResponseEntity<?> getListOfBrands(){
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toListOfBrandDto(brandService.getListOfBands()));

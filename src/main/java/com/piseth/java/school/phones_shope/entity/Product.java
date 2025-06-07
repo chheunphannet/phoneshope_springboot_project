@@ -12,8 +12,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.DecimalMin;
+import lombok.Builder;
 import lombok.Data;
-
+@Builder
 @Entity
 @Data
 @Table(name = "Product", uniqueConstraints = { @UniqueConstraint(columnNames = { "color_id", "model_id" }) })
