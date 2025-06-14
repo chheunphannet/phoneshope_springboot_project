@@ -23,7 +23,6 @@ public enum RoleEnum {
 				.map(p -> new SimpleGrantedAuthority(p.getDecription()))
 				.collect(Collectors.toSet());
 		
-		System.out.println(grantedAuthority);
 		return grantedAuthority;
 	}
 }
