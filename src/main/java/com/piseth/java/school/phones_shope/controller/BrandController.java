@@ -28,14 +28,14 @@ import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.56.1:4200"})
+//@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.56.1:4200"})
 @RequestMapping("/brands")
 public class BrandController {
 	
 	private final BrandService brandService;
 	private final ModelService modelService;
 	
-	@PreAuthorize("hasAuthority('Brand:Write')")
+	@PreAuthorize("hasAuthority('brand:write')")
 	@PostMapping("/post")
 	public ResponseEntity<?> create(@RequestBody BrandDTO dto) {
 		return ResponseEntity.ok(brandService.save(BrandMapper.INSTANCE.toBrand(dto))); 
@@ -47,7 +47,7 @@ public class BrandController {
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toBrandDTO(brand)); 
 	}
 	
-	@PreAuthorize("hasAuthority('Brand:Read')")
+	@PreAuthorize("hasAuthority('brand:read')")
 	@GetMapping
 	public ResponseEntity<?> getListOfBrands(){
 		return ResponseEntity.ok(BrandMapper.INSTANCE.toListOfBrandDto(brandService.getListOfBands()));
@@ -65,7 +65,7 @@ public class BrandController {
 		public ResponseEntity<?> getListByName(@PathParam("name") String name){
 			return ResponseEntity.ok(BrandMapper.INSTANCE.toListOfBrandDto(brandService.getByName(name)));
 		}
-	
+	@PreAuthorize("hasAuthority('brand:write')")
 	@PutMapping("{id}")
 	public ResponseEntity<?> updatebyId(@PathVariable Integer id, @RequestBody BrandDTO dto) {
 		Brand brand = brandService.updateByID(id, BrandMapper.INSTANCE.toBrand(dto));

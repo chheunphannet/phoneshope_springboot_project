@@ -29,28 +29,37 @@ public class AccessTokenVerify extends OncePerRequestFilter {
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
+		
+		// 1. It looks for the "Authorization" header in your request to /brands.
 		String authorizationHeader = request.getHeader("Authorization");
+
+		// 2. If the header is not found OR it doesn't start with "Bearer ", 
+		//    it does nothing and proceeds. Spring Security then sees no authentication
+		//    and returns a 401 Unauthorized error. THIS IS WHAT IS HAPPENING.
 		if (Objects.isNull(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")
 				|| authorizationHeader.isBlank()) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 
+		// 3. If you provide the header correctly, this code will run,
+		//    validate your token, and grant you access.
 		String token = authorizationHeader.replace("Bearer ", "");
 		Claims signedClaims = Jwts.parser()
-				.verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes())) // Use verifyWith()																				// setSigningKey()
+				.verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes())) 
 				.build().parseSignedClaims(token).getPayload();
 		
-		String username = signedClaims.getSubject();
+		String username = signedClaims.getSubject(); //get user_name
 		List<Map<String, String>> authorities = (List<Map<String, String>>) signedClaims.get("authorities");
 
 		Set<SimpleGrantedAuthority> grantedAuthorities;
+		
         if (authorities != null) {
             grantedAuthorities = authorities.stream()
-                    .map(authMap -> new SimpleGrantedAuthority(authMap.get("authority"))) // or whatever key contains the role
+                    .map(authMap -> new SimpleGrantedAuthority(authMap.get("authority")))
                     .collect(Collectors.toSet());
         } else {
-            grantedAuthorities = Set.of(); // or Set.of(new SimpleGrantedAuthority("ROLE_USER"))
+            grantedAuthorities = Set.of();
         }
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, null, grantedAuthorities);

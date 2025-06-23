@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,13 +52,13 @@ public class JwtFillter extends UsernamePasswordAuthenticationFilter {
 	            throw new IllegalStateException("JWT secret key is not configured. Please set jwt.secret in application.properties");
 	        }
 			String token = Jwts.builder()
-			.subject(authResult.getName())
-			.issuedAt(new Date())
-			.claim("authorities", authResult.getAuthorities())
-		    .expiration(java.sql.Date.valueOf(LocalDate.now().plusDays(7)))
-			.issuer("phoneshop.com")
-			.signWith(Keys.hmacShaKeyFor(key.getBytes()))
-			.compact();
+					.subject(authResult.getName())
+					.issuedAt(new Date())
+					.claim("authorities", authResult.getAuthorities()) //get permission what can do?
+				    .expiration(java.sql.Date.valueOf(LocalDate.now().plusDays(7)))
+					.issuer("phoneshop.com")
+					.signWith(Keys.hmacShaKeyFor(key.getBytes()))
+					.compact();
 			response.setHeader("Authorization","Bearer " + token);
 	}
 
